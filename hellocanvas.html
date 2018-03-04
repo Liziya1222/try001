@@ -1,0 +1,32 @@
+<canvas id="myCanvas" width="400" height="400" style="border:1px solid #c3c3c3;">
+
+<script type="text/javascript">
+
+var canvas=document.getElementById('myCanvas');
+var ctx=canvas.getContext('2d');
+
+ctx.beginPath();
+ctx.moveTo(100, 100);
+ctx.lineTo(200, 200);
+ctx.closePath();
+ctx.lineWidth = 8; 
+ctx.strokeStyle = "#00ff00";
+ctx.lineJoin = "round";
+ctx.stroke();
+
+ctx.beginPath();
+ctx.moveTo(0, 0);
+ctx.lineTo(20, 0);
+ctx.lineTo(20, 20);
+ctx.lineTo(0, 20);
+ctx.closePath();
+ctx.strokeStyle = "#55ff00";
+ctx.fill();
+
+ctx.strokeRect(100, 100,10,10);
+ctx.strokeStyle = "#002200";
+ctx.fillRect(150,150,20,20);
+ctx.strokeStyle = "#332200";
+
+
+</script>
