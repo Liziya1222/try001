@@ -1,0 +1,150 @@
+<DOCTYPRE html>
+    <html>
+        <head>
+            <title>
+                最佳工作序列问题
+            </title>
+    
+        </head>
+            <body>   
+                <!界面设计>
+                <form action="#" method="get">
+                    <br>   
+                    最佳工作序列
+                    <br><br>
+                    
+                    <hr>
+                    任务1：<input type="number" name="number1" id="number1" />
+                    <br>
+                    工作费时:<input type="number" name="time1" id="time1" />
+                    <br>
+                    最后期限:<input type="number" name="deadline1" id="deadline1"  />
+                    <br>
+                    工作价值:<input type="number" name="value1" id="value1"  />
+                    <br><br>
+                    任务2：<input type="number" name="number2" id="number2" />
+                    <br>
+                    工作费时:<input type="number" name="time2" id="time2" />
+                    <br>
+                    最后期限:<input type="number" name="deadline2" id="deadline2"  />
+                    <br>
+                    工作价值:<input type="number" name="value2" id="value2"  />
+                    <br><br>
+                    任务3：<input type="number" name="number3" id="number3" />
+                    <br>
+                    工作费时:<input type="number" name="time3" id="time3" />
+                    <br>
+                    最后期限:<input type="number" name="deadline3" id="deadline3"  />
+                    <br>
+                    工作价值:<input type="number" name="value3" id="value3"  />
+                    <br><br>
+                    任务4：<input type="number" name="number4" id="number4" />
+                    <br>
+                    工作费时:<input type="number" name="time4" id="time4" />
+                    <br>
+                    最后期限:<input type="number" name="deadline4" id="deadline4"  />
+                    <br>
+                    工作价值:<input type="number" name="value4" id="value4"  />
+                    <hr>
+                    <br><br>
+                    <input type="submit" value="确定" onclick="main()"/>
+                    </form>
+             
+                    <script>
+                       
+                        var program=new Array(4); //用于记录任务数
+                        var usetime=new Array(4); //用于记录工作费时
+                        var deadline=new Array(4); //用于记录最后期限
+                        var value=new Array(4); //用于记录任务价值
+                        var linshi = new Array;//临时存放
+                        var linshi0 = new Array;//临时存放
+                        var path = new Array;//记录路径
+
+
+
+                         function queue(linshi){  //排列
+                            for(var i=0;i<linshi.length-1;i++){
+                                for(var j=0;j<linshi.length-i-1;j++){
+                                    if(linshi[j]>linshi[j+1]){
+                                        var temp=linshi[j];
+                                        linshi[j]=linshi[j+1];
+                                        linshi[j+1]=temp;
+                                    }
+                                }
+                            }
+
+                        }  
+
+                         function Judgment(linshi0,i){
+                        var judge = false;
+
+                        if (linshi0[i]!=0)//重复结点，错误路径
+                            judge = true;	
+                        else
+                        linshi0[i] = 1;
+                        return judge;//false为可行路径
+                    }  
+
+                    function Path(linshi0,i){  //记录路径
+                        for (var i = 0; i < 5;i++)
+                        linshi0[i] = 0;
+                        for (var i = 1; i < step; i++){
+                            path[i] = 1;
+                        }
+                    }
+
+                  
+                        
+                        function main(){//记录
+
+              
+                    
+
+                                 program[0] = document.getElementById("number1").value;
+                                 usetime[0] = document.getElementById("time1").value;
+                                 deadline[0] = document.getElementById("deadline1").value;
+                                 value[0] = document.getElementById("value1").value;
+
+                                 program[1] = document.getElementById("number2").value;
+                                 usetime[1] = document.getElementById("time2").value;
+                                 deadline[1] = document.getElementById("deadline2").value;
+                                 value[1] = document.getElementById("value2").value;
+                                  
+                                 program[2] = document.getElementById("number3").value;
+                                 usetime[2] = document.getElementById("time3").value;
+                                 deadline[2] = document.getElementById("deadline3").value;
+                                 value[2] = document.getElementById("value3").value;
+                                  
+                                 program[3] = document.getElementById("number4").value;
+                                 usetime[3] = document.getElementById("time4").value;
+                                 deadline[3] = document.getElementById("deadline4").value;
+                                 value[3] = document.getElementById("value4").value;
+
+                                 queue(deadline);
+
+                                 
+                                 for(var j = 0;j <4;j++){
+                                     if(usetime[j]+usetime[j+1]<deadline[j+1]){
+                                         path(program,j);
+  
+                                     }
+
+                                 }
+                            
+                            for(var i = 0;i<4;i++){
+                                document.write("任务:"+program[i]+"<br>"); 
+                                document.write("所需时间:"+usetime[i]+"<br>");
+                                document.write("截止时间:"+deadline[i]+"<br>");
+                                document.write("价值:"+value[i]+"<br><br>"); 
+                            }
+                            for(var i = 0;i<4;i++){
+                                Judgment(program,i);
+                            }
+                    
+                        
+                        }
+    
+                    </script>
+                </body>
+        </html>
+    </DOCTYPRE>
