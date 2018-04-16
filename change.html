@@ -648,27 +648,7 @@
                     tranx=a.slice(0);
                     trany=b.slice(0);
                 }
-                //画布
-                function dracanvas(ax,by){
-                    var canvas=document.getElementById("myCanvas");
-
-                    var ctx =canvas.getContext('2d');
-                    ctx.lineWidth = 1;
-                    ctx.strokeStyle = "black";  
-                    
-                    for(var i=0;i<32;i++){
-                        ctx.beginPath();
-                        ctx.moveTo(ax[0],by[i]);
-                        ctx.lineTo(ax[31],by[i]);
-                        ctx.stroke();
-                    }
-                    for(var i=0;i<32;i++){
-                        ctx.beginPath();
-                        ctx.moveTo(ax[i],by[0]);
-                        ctx.lineTo(ax[i],by[31]);  
-                        ctx.stroke();
-                    }
-                }
+                
                 //当前名字图形中心求解
                 function outsourcing(arr){
                     var xs,ys,xb,yb;
