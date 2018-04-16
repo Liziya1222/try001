@@ -1,150 +1,216 @@
-<DOCTYPRE html>
-    <html>
-        <head>
-            <title>
-                最佳工作序列问题
-            </title>
-    
-        </head>
-            <body>   
-                <!界面设计>
-                <form action="#" method="get">
-                    <br>   
-                    最佳工作序列
-                    <br><br>
-                    
-                    <hr>
-                    任务1：<input type="number" name="number1" id="number1" />
-                    <br>
-                    工作费时:<input type="number" name="time1" id="time1" />
-                    <br>
-                    最后期限:<input type="number" name="deadline1" id="deadline1"  />
-                    <br>
-                    工作价值:<input type="number" name="value1" id="value1"  />
-                    <br><br>
-                    任务2：<input type="number" name="number2" id="number2" />
-                    <br>
-                    工作费时:<input type="number" name="time2" id="time2" />
-                    <br>
-                    最后期限:<input type="number" name="deadline2" id="deadline2"  />
-                    <br>
-                    工作价值:<input type="number" name="value2" id="value2"  />
-                    <br><br>
-                    任务3：<input type="number" name="number3" id="number3" />
-                    <br>
-                    工作费时:<input type="number" name="time3" id="time3" />
-                    <br>
-                    最后期限:<input type="number" name="deadline3" id="deadline3"  />
-                    <br>
-                    工作价值:<input type="number" name="value3" id="value3"  />
-                    <br><br>
-                    任务4：<input type="number" name="number4" id="number4" />
-                    <br>
-                    工作费时:<input type="number" name="time4" id="time4" />
-                    <br>
-                    最后期限:<input type="number" name="deadline4" id="deadline4"  />
-                    <br>
-                    工作价值:<input type="number" name="value4" id="value4"  />
-                    <hr>
-                    <br><br>
-                    <input type="submit" value="确定" onclick="main()"/>
-                    </form>
-             
-                    <script>
-                       
-                        var program=new Array(4); //用于记录任务数
-                        var usetime=new Array(4); //用于记录工作费时
-                        var deadline=new Array(4); //用于记录最后期限
-                        var value=new Array(4); //用于记录任务价值
-                        var linshi = new Array;//临时存放
-                        var linshi0 = new Array;//临时存放
-                        var path = new Array;//记录路径
 
+<html> 
+    <head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 
-
-                         function queue(linshi){  //排列
-                            for(var i=0;i<linshi.length-1;i++){
-                                for(var j=0;j<linshi.length-i-1;j++){
-                                    if(linshi[j]>linshi[j+1]){
-                                        var temp=linshi[j];
-                                        linshi[j]=linshi[j+1];
-                                        linshi[j+1]=temp;
-                                    }
-                                }
-                            }
-
-                        }  
-
-                         function Judgment(linshi0,i){
-                        var judge = false;
-
-                        if (linshi0[i]!=0)//重复结点，错误路径
-                            judge = true;	
-                        else
-                        linshi0[i] = 1;
-                        return judge;//false为可行路径
-                    }  
-
-                    function Path(linshi0,i){  //记录路径
-                        for (var i = 0; i < 5;i++)
-                        linshi0[i] = 0;
-                        for (var i = 1; i < step; i++){
-                            path[i] = 1;
-                        }
-                    }
-
-                  
-                        
-                        function main(){//记录
-
-              
-                    
-
-                                 program[0] = document.getElementById("number1").value;
-                                 usetime[0] = document.getElementById("time1").value;
-                                 deadline[0] = document.getElementById("deadline1").value;
-                                 value[0] = document.getElementById("value1").value;
-
-                                 program[1] = document.getElementById("number2").value;
-                                 usetime[1] = document.getElementById("time2").value;
-                                 deadline[1] = document.getElementById("deadline2").value;
-                                 value[1] = document.getElementById("value2").value;
-                                  
-                                 program[2] = document.getElementById("number3").value;
-                                 usetime[2] = document.getElementById("time3").value;
-                                 deadline[2] = document.getElementById("deadline3").value;
-                                 value[2] = document.getElementById("value3").value;
-                                  
-                                 program[3] = document.getElementById("number4").value;
-                                 usetime[3] = document.getElementById("time4").value;
-                                 deadline[3] = document.getElementById("deadline4").value;
-                                 value[3] = document.getElementById("value4").value;
-
-                                 queue(deadline);
-
-                                 
-                                 for(var j = 0;j <4;j++){
-                                     if(usetime[j]+usetime[j+1]<deadline[j+1]){
-                                         path(program,j);
+<style> 
+ </style> 
+ </head> 
+ <body> 
+ <div align="center" style="position:absolute; width:540px;height:420px; top:38%;left:50%; margin-left:-270px;margin-top:-210px; ">  
+ <h2>最佳工作序列</h2> 
+ <div style="margin-left:20px;margin-right:20px;margin-top:-20px;"><h6 style="font-size:14px;">问题：有N件工作，输入每件工作的费时、最后完成的期限及工作的价值，试求可能的一个完成工作序列，使价值和最大</h6> 
+ <div style="margin-left:20px;margin-right:20px;"><p style="font-size:12px;margin-top:-20px;">* N件工作的不同值用“,”的英文的逗号隔开，注意输入的元素的对应</p></div> 
+ <table cellspacing="14"> 
+ 	<tr> 
+ 		<td>请输入工作件数：</td> 
+ 		<td><input type="text" id="n"></td> 
+	</tr> 
+ 	<tr> 
+ 		<td>请分别输入工作的编号:</td> 
+		<td><input type="text" id="id"></td> 
+	</tr> 
+	<tr> 
+ 		<td>请分别输入工作的耗时:</td> 
+ 		<td><input type="text" id="time"></td> 
+ 	</tr> 
+ 	<tr> 
+ 		<td>请分别输入工作的最后完成期限:</td> 
+ 		<td><input type="text" id="deadline"></td> 
+ 	</tr> 
+ 	<tr> 
+		<td>请分别输入工作的价值:</td> 
+ 		<td><input type="text" id="profit"></td> 
+ 	</tr> 
+ </table> 
+ <button type="button" onclick = "GetValue();ArrangeWork();" style="width:90px;height:35px;margin-top:10px; border:1px solid; background:#FFF; font-size:14px">开始计算</button> 
+ </div> 
+ <div id = "result" style="display:none;text-align:center;background-color:#F0F0F0;width:540px;height:100px;margin-top:30px;"> 
+ </div> 
+<body> 
+ <script> 
+	 
+ 	var n =null,id=null,time = null,profit=null,deadline=null,Maxdeadline=null; 
+ 	var Work = new Array(); 
+	 
+ 	//初始化一个用于计算的数组 
+ 	var Value = new Array(); 
+ 	for(var i=0;i<200;i+=1) 
+ 	{	 
+ 		Value[i] = new Array(); 
+ 		for(var j=0;j<200;j+=1) 
+ 			Value[i][j] = 0; 
+ 	} 
+ 	 
+	function GetMaxDeadline() 
+ 	{ 
+ 		var max = 0; 
+		for (var i = 0; i < n; i+=1) 
+		{ 
+ 			if (Work[i].deadline > max) 
+ 				max = Work[i].deadline; 
+ 		}	 
+		return max; 
+ 	} 
+	 
+ 	function max(a,b) 
+ 	{ 
+		if (a >= b) 
+ 			return a; 
+		else return b; 
+ 	} 
+ 	 
+	 
+ 	function ArrangeWork() 
+ 	{ 
+ 	 
+ 		Maxdeadline = GetMaxDeadline(); 
+ 		 
+ 		//填表,其中第一行和第一列全为0   
+ 		for (var i = 0; i <= n; i+=1) 
+ 			Value[i][0] = 0; 
+ 		for (var j = 0; j <= Maxdeadline; j+=1) 
+			Value[0][j] = 0; 
+ 		for (var i = 1; i <= n; i+=1) 
+		{ 
+ 			for (var j = 1; j <= Maxdeadline; j+=1) 
+ 			{ 
+ 				if (j >= Work[i - 1].time && Value[i - 1][j - Work[i - 1].time] + Work[i - 1].profit > Value[i - 1][j]) 
+				{ 
+ 					if (j <= Work[i - 1].deadline) 
+						Value[i][j] = Value[i - 1][j - Work[i - 1].time] + Work[i - 1].profit; 
+					else 
+ 						Value[i][j] = Value[i][j - 1]; 
+ 				} 
+ 				else 
+			{ 
+					Value[i][j] = Value[i - 1][j]; 
+				} 
+		} 
+		} 
+ 		 
+ 		 
+	var result = new Array(n+1); 
   
-                                     }
-
-                                 }
-                            
-                            for(var i = 0;i<4;i++){
-                                document.write("任务:"+program[i]+"<br>"); 
-                                document.write("所需时间:"+usetime[i]+"<br>");
-                                document.write("截止时间:"+deadline[i]+"<br>");
-                                document.write("价值:"+value[i]+"<br><br>"); 
-                            }
-                            for(var i = 0;i<4;i++){
-                                Judgment(program,i);
-                            }
-                    
-                        
-                        }
-    
-                    </script>
-                </body>
-        </html>
-    </DOCTYPRE>
+ 		//计算工作序列 
+		var j = Maxdeadline; 
+ 		for (var i = n; i > 0; i-=1) 
+	{ 
+			if (Value[i][j] > Value[i - 1][j]) 
+			{ 
+				result[i - 1] = 1; 
+			j = j - Work[i - 1].time; 
+ 			} 
+			else 
+ 			{	 
+				result[i-1] = 0; 
+ 			} 
+		} 
+ 		 
+		document.getElementById('result').style.display="block"; 
+ 		 
+ 		//输出最佳序列和总价值 
+		str = "<br/><a>最佳的工作序列是：";		 
+ 		for (var i = 0; i < n; i+=1) 
+		{ 
+		if (result[i]) 
+			{ 
+ 				str += Work[i].id + "  "; 
+		} 
+	} 
+		str += '</a><br/> <br/>'; 
+		str += "<a>最后的总价值为："; 
+	str += Value[n][Maxdeadline].toString(); 
+		str += "</a>" 
+		document.getElementById('result').innerHTML  = str; 
+	} 
+	 
+	function GetValue() 
+	{ 
+	 
+		if(document.getElementById('n').value!="") 
+ 			n = parseInt(document.getElementById('n').value); 
+ 		else 
+		{ 
+			alert('请在文本框输入正确的值！'); 
+			return; 
+ 		} 
+ 		if(document.getElementById('id').value!="") 
+ 		{ 
+ 			id0 = document.getElementById('id').value; 
+ 			id = id0.split(',') 
+		} 
+		else 
+ 		{ 
+ 			alert('请在文本框输入正确的值！'); 
+ 			return; 
+ 		} 
+ 		 
+ 		if(document.getElementById('time').value!="") 
+		{ 
+ 			time0 = document.getElementById('time').value; 
+ 			time = time0.split(','); 
+ 		} 
+ 		else 
+		{ 
+ 			alert('请在文本框输入正确的值！'); 
+			return; 
+		} 
+ 		 
+		if(document.getElementById('deadline').value!="") 
+		{ 
+ 			deadline0 = document.getElementById('deadline').value; 
+ 			deadline = deadline0.split(','); 
+		} 
+		else 
+ 		{ 
+			alert('请在文本框输入正确的值！'); 
+ 			return; 
+ 		} 
+		 
+ 		if(document.getElementById('profit').value!="") 
+		{ 
+ 			profit0 = document.getElementById('profit').value; 
+			profit = profit0.split(','); 
+ 		} 
+ 		else 
+ 		{ 
+			alert('请在文本框输入正确的值！'); 
+			return; 
+		} 
+ 		 
+		for(var i=0;i<n;i+=1) 
+ 		{ 
+ 			var temp = 	{'id':id[i],'time':parseInt(time[i]),'deadline':parseInt(deadline[i]),'profit':parseInt(profit[i])}; 
+			Work[i] = temp; 
+ 		} 
+ 		 		 
+				//对Work进行排序 
+ 		Work.sort(function(a,b){ 
+ 			if (a.deadline < b.deadline) 
+ 				return -1; 
+			else if (a.deadline == b.deadline) 
+			{ 
+				if (a.time < b.time) 
+ 					return -1; 
+				else return 1; 
+ 			} 
+			else 
+ 				return 1; 
+ 		}) 
+ 		 
+  
+	} 
+ </script> 
+ 
+</html> 
