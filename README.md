@@ -14,6 +14,12 @@ hellocanvas：https://liziya1222.github.io/try001/hellocanvas.html
 
 地图：https://liziya1222.github.io/try001/地图投影.html
 
+面积计算：https://liziya1222.github.io/try001/area.html
+
+道格拉斯压缩：https://liziya1222.github.io/try001/yasuo.html
+
 四叉树：https://liziya1222.github.io/try001/4tree.html
 
 左转算法：https://liziya1222.github.io/try001/leftturn.html
+
+地图符号：https://liziya1222.github.io/try001/symbol.html
