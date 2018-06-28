@@ -14,7 +14,7 @@ hellocanvas：https://liziya1222.github.io/try001/hellocanvas.html
 
 地图：https://liziya1222.github.io/try001/地图投影.html
 
-面积计算：https://liziya1222.github.io/try001/area.html
+面积计算：https://liziya1222.github.io/try001/public/area.html
 
 道格拉斯压缩：https://liziya1222.github.io/try001/yasuo.html
 
